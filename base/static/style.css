@@ -58,8 +58,7 @@ html {
   #formFooter {
     background-color: #f6f6f6;
     border-top: 1px solid #dce8f1;
-    padding: 25px;
-    text-align: center;
+    padding: 20px;
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;
   }
@@ -115,7 +114,7 @@ html {
     transform: scale(0.95);
   }
   
-  input[type=email], input[type=password] {
+  input[type=email], input[type=password], input[type=text] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -136,13 +135,23 @@ html {
     border-radius: 5px 5px 5px 5px;
   }
   
-  input[type=email], input[type=password]:focus {
+  input[type="email"]:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #5fbae9;
+  }
+
+  input[type="text"]:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #5fbae9;
+  } 
+  
+  input[type="password"]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
   }
 
   
-  input[type=email], input[type=password]:placeholder {
+  input[type=email], input[type=text], input[type=password]:placeholder {
     color: #cccccc;
   }
   

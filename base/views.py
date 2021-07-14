@@ -16,10 +16,37 @@ firebase_config = {
 # Initialize Firebase
 firebase = pyrebase.initialize_app(firebase_config)
 
-auth = firebase.auth()
+authfb = firebase.auth()
+
+db = firebase.database()
 
 def indexView(request):
     return render(request, 'base/index.html')
+
+def registerView(request):
+    return render(request, 'base/register.html')
+
+def postRegisterView(request):
+    name = request.POST.get('name')
+    email = request.POST.get('email')
+    pw = request.POST.get('pass')
+
+    try:
+        user = authfb.create_user_with_email_and_password(email, pw)
+    except:
+        message = "Please Enter a Valid Name & Email Address"
+        return render(request, 'base/register.html', {'message': message})
+
+    uid = user['localId']
+
+    data = {
+        'name': name,
+        'status': '1'
+    }
+
+    db.child('users').child(uid).child('details').set(data)
+
+    return render(request, 'base/login.html')
 
 def authView(request):
     return render(request, 'base/login.html')
@@ -29,7 +56,7 @@ def profileView(request):
     pw = request.POST.get('pass')
 
     try:
-        user = auth.sign_in_with_email_and_password(email, pw)
+        user = authfb.sign_in_with_email_and_password(email, pw)
     except:
         message = "Invalid Credentials"
         return render(request, 'base/login.html', {'message': message})
