@@ -1,18 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from decouple import config
+from django.contrib.auth import logout
 import pyrebase
 
-config = {
-    'apiKey': "AIzaSyDyR0VY3oPezm2v5_5tDK1Sdwkirmac6CI",
-    'authDomain': "djangofirebase-c9c2d.firebaseapp.com",
-    'projectId': "djangofirebase-c9c2d",
-    'databaseURL': "https://djangofirebase-c9c2d-default-rtdb.asia-southeast1.firebasedatabase.app/",
-    'storageBucket': "djangofirebase-c9c2d.appspot.com",
-    'messagingSenderId': "932252377053",
-    'appId': "1:932252377053:web:0a6cdb65d22966d888a034",
-    'measurementId': "G-Z8QMQ8ET20",
+firebase_config = {
+    'apiKey': config('API_KEY'),
+    'authDomain': config('PROJECT_ID')+".firebaseapp.com",
+    'projectId': config('PROJECT_ID'),
+    'databaseURL': "https://"+config('PROJECT_ID')+"-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    'storageBucket': config('PROJECT_ID')+".appspot.com",
+    'messagingSenderId': config('MESSEGING_SENDER_ID'),
+    'appId': config('APP_ID'),
+    'measurementId': config('MEASUREMENT_ID'),
 }
 # Initialize Firebase
-firebase = pyrebase.initialize_app(config)
+firebase = pyrebase.initialize_app(firebase_config)
 
 auth = firebase.auth()
 
@@ -26,12 +28,17 @@ def profileView(request):
     email = request.POST.get('email')
     pw = request.POST.get('pass')
 
-    user = auth.sign_in_with_email_and_password(email, pw)
+    try:
+        user = auth.sign_in_with_email_and_password(email, pw)
+    except:
+        message = "Invalid Credentials"
+        return render(request, 'base/login.html', {'message': message})
 
-    # db = firebase.database()
-
-    # data = {}
-
-    # results = db.child("users").push(data, user['idToken'])
+    session_id = user['idToken']
+    request.session['uid'] = str(session_id)
 
     return render(request, 'base/profile.html', {'email': email})
+
+def logOutView(request):
+    logout(request)
+    return render(request, 'base/login.html')
