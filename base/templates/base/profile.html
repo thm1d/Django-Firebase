@@ -14,20 +14,22 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Profile</title>
     <style>  
-        .log-out-button {
-            position: absolute;
-            right: 10px;
-            top: 5px;
+        a, a:hover, a:focus, a:active {
+            text-decoration: none;
+            color: inherit;
         }
     </style>
 </head>
 <body>
     <h3>Welcome, {{ email }}</h3>
 
-    <div class="log-out-button">
+    <div class="xbutton">
         <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
             <i class='bx bx-log-out'></i> Log out
         </a>
     </div>
+
+    <button type="button" class="btn btn-primary ybutton"><a href="{% url 'create-report' %}">Create Report</a></button>
+    <button type="button" class="btn btn-info ybutton">Check Report</button>
 </body>
 </html>

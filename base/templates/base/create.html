@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Login</title>
+    
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div class="xbutton">
+            <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
+                <i class='bx bx-log-out'></i> Log out
+            </a>
+        </div>
+        <div id="formContent">
+            <!-- Tabs Titles -->
+      
+            <!-- Icon -->
+            <div class="fadeIn first mb-5">
+                {% load static %}
+               <img src="{% static 'bxs-report.svg' %}" height="40" id="icon" alt="User Icon" />
+               <h3>Create Report</h3>
+            </div>
+      
+            <!-- Login Form -->
+            <form action="/post-create/" method="POST">
+                {% csrf_token %}
+                <label for="work-assign" class="w-100 text-left font-weight-bold">Work Assign : </label>
+                <input type="text" id="work-assign" class="fadeIn second" name="work-assign" placeholder="Work Name">
+                <label for="progress" class="w-100 text-left font-weight-bold">Progress : </label>
+                <textarea id="progress" class="" rows="5" cols="40" name="progress"></textarea>
+                <input type="submit" class="fadeIn fourth" value="Submit">
+            </form>
+      
+        </div>
+    </div>
+</body>
+</html>

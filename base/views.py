@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from decouple import config
 from django.contrib.auth import logout
-import pyrebase
+import pyrebase, time, pytz
+from datetime import timezone, datetime
 
 firebase_config = {
     'apiKey': config('API_KEY'),
@@ -45,7 +46,7 @@ def postRegisterView(request):
     }
 
     db.child('users').child(uid).child('details').set(data)
-
+    
     return render(request, 'base/login.html')
 
 def authView(request):
@@ -64,8 +65,35 @@ def profileView(request):
     session_id = user['idToken']
     request.session['uid'] = str(session_id)
 
-    return render(request, 'base/profile.html', {'email': email})
+    local_id = user['localId']
+    name = db.child('users').child(local_id).child('details').child('name').get().val()
+    return render(request, 'base/profile.html', {'email': name})
 
 def logOutView(request):
     logout(request)
     return render(request, 'base/login.html')
+
+def createReportView(request):
+    return render(request, 'base/create.html')
+
+def postCreateReportView(request):
+    work = request.POST.get('work-assign')
+    progress = request.POST.get('progress')
+
+    tz = pytz.timezone('Asia/Dhaka')
+    time_now = datetime.now(timezone.utc).astimezone(tz)
+    time_mil = int(time.mktime(time_now.timetuple()))
+
+    id_token = request.session['uid']
+    user_info = authfb.get_account_info(id_token)
+    local_id = user_info['users'][0]['localId']
+    print(local_id)
+
+    data = {
+        'work': work,
+        'progress': progress
+    }
+
+    db.child('users').child(local_id).child('reports').child(time_mil).set(data)
+    name = db.child('users').child(local_id).child('details').child('name').get().val()
+    return render(request, 'base/profile.html', {'email': name})
