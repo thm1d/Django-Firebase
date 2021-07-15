@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import indexView, registerView, postRegisterView, authView, profileView, logOutView, createReportView, postCreateReportView
+from .views import indexView, registerView, postRegisterView, authView, profileView, logOutView, createReportView, postCreateReportView, checkReportView, postCheckReportView
 
 urlpatterns = [
     path('', indexView, name='home'),
@@ -11,4 +11,6 @@ urlpatterns = [
     path('logout/', logOutView, name='logout'),
     path('create-report/', createReportView, name='create-report'),
     path('post-create/', postCreateReportView, name='post-create'),
+    path('check-report/', checkReportView, name='check-report'),
+    path('post-report/<str:key>', postCheckReportView, name='post-report'),
 ]

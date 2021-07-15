@@ -21,15 +21,33 @@
     </style>
 </head>
 <body>
-    <h3>Welcome, {{ email }}</h3>
-
     <div class="xbutton">
         <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
             <i class='bx bx-log-out'></i> Log out
         </a>
     </div>
-
-    <button type="button" class="btn btn-primary ybutton"><a href="{% url 'create-report' %}">Create Report</a></button>
-    <button type="button" class="btn btn-info ybutton"><a href="{% url 'check-report' %}">Check Report</a></button>
+         
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="content w-auto p-2">
+                <h3 class="mx-5"> {{ name }}'s Reports</h3>
+                {% if message %}
+                <div class="alert alert-primary alert-dismissible fade show mx-5">
+                    <strong> {{ message }} </strong>
+                    <a href="{% url 'profile' %}" class="close" data-dismiss="alert">&times;</a>
+                </div>
+                {% else %} 
+                <div class="reports-list">
+                    {% for time, date, work in comb_list %}
+                    <div class="report-list">
+                        <p><b>Date :</b> {{ date }} &nbsp; <b>Work :</b> <a class="work-link" href="{% url 'post-report'  time %}"><u><i>{{ work }}</i></u></a></p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
