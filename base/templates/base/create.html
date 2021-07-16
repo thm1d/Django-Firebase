@@ -7,9 +7,10 @@
 
     {% load static %}
     <link href="{% static 'style.css' %}" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
 
     <title>Login</title>
     
@@ -37,11 +38,69 @@
                 <label for="work-assign" class="w-100 text-left font-weight-bold">Work Assign : </label>
                 <input type="text" id="work-assign" class="fadeIn second" name="work-assign" placeholder="Work Name">
                 <label for="progress" class="w-100 text-left font-weight-bold">Progress : </label>
-                <textarea id="progress" class="" rows="5" cols="40" name="progress"></textarea>
-                <input type="submit" class="fadeIn fourth" value="Submit">
+                <input id="progress" class="" type="text" name="progress" placeholder="e.g. 80%">
+                <label for="file-upload" class="w-100 text-left font-weight-bold">Document : </label>
+                <input id="file-upload" class="" type="file" name="file[]">
+                <input type="hidden" name="url" id="url" value="">
+                <button type="button" onclick="uploadimage()">Upload</button>
+                <input type="submit" class="fadeIn fourth mt-5" value="Submit">
             </form>
       
         </div>
     </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDyR0VY3oPezm2v5_5tDK1Sdwkirmac6CI",
+            authDomain: "djangofirebase-c9c2d.firebaseapp.com",
+            databaseURL: "https://djangofirebase-c9c2d-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            storageBucket: "djangofirebase-c9c2d.appspot.com"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        function uploadimage(){
+            var storage = firebase.storage();
+
+            var file = document.getElementById("file-upload").files[0];
+            var storageRef = storage.ref();
+            console.log(storageRef);
+
+            // Upload file and metadata to the object 'images/mountains.jpg'
+            var uploadTask = storageRef.child(file.name).put(file);
+            console.log(uploadTask);
+
+            // Listen for state changes, errors, and completion of the upload.
+            uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+                (snapshot) => {
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    // var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    // console.log('Upload is ' + progress + '% done');
+                    // switch (snapshot.state) {
+                    // case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    //     console.log('Upload is paused');
+                    //     break;
+                    // case firebase.storage.TaskState.RUNNING: // or 'running'
+                    //     console.log('Upload is running');
+                    //     break;
+                    // }
+                    console.log("file uplaoded succesfully");
+                }, 
+                (error) => {
+                    console.log("file uplaoded failed");
+                }, 
+                () => {
+                    // Upload completed successfully, now we can get the download URL
+                    var url = uploadTask.snapshot.downloadURL;
+                    console.log('File available at', url);
+                    console.log("got url");
+                    document.getElementById("url").value = url;
+                    alert("file uploaded successfully");
+                    // uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    // console.log('File available at', downloadURL);
+                    });
+        };
+
+    </script>
 </body>
 </html>

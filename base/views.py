@@ -79,6 +79,7 @@ def createReportView(request):
 def postCreateReportView(request):
     work = request.POST.get('work-assign')
     progress = request.POST.get('progress')
+    url = request.POST.get('url')
 
     tz = pytz.timezone('Asia/Dhaka')
     time_now = datetime.now(timezone.utc).astimezone(tz)
@@ -90,7 +91,8 @@ def postCreateReportView(request):
 
     data = {
         'work': work,
-        'progress': progress
+        'progress': progress,
+        'url': url
     }
 
     db.child('users').child(local_id).child('reports').child(time_mil).set(data)
