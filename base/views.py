@@ -92,7 +92,7 @@ def postCreateReportView(request):
     data = {
         'work': work,
         'progress': progress,
-        'url': url
+        'file-url': url
     }
 
     db.child('users').child(local_id).child('reports').child(time_mil).set(data)
@@ -143,6 +143,7 @@ def postCheckReportView(request, key):
 
     work = db.child('users').child(local_id).child('reports').child(time).child('work').get().val()
     progress = db.child('users').child(local_id).child('reports').child(time).child('progress').get().val()
+    file_url = db.child('users').child(local_id).child('reports').child(time).child('file-url').get().val()
  
     i = float(time)
     date = datetime.fromtimestamp(i).strftime('%H:%M %d-%m-%Y')
@@ -153,5 +154,6 @@ def postCheckReportView(request, key):
         'work': work,
         'progress': progress,
         'date': date,
+        'url': file_url,
     }
     return render(request, 'base/report.html', context)
