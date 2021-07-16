@@ -21,15 +21,22 @@
     </style>
 </head>
 <body>
-    <h3>Welcome, {{ email }}</h3>
+    
 
     <div class="xbutton">
         <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
             <i class='bx bx-log-out'></i> Log out
         </a>
     </div>
-
-    <button type="button" class="btn btn-primary ybutton"><a href="{% url 'create-report' %}">Create Report</a></button>
-    <button type="button" class="btn btn-info ybutton"><a href="{% url 'check-report' %}">Check Report</a></button>
+    
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="content w-auto p-2">
+                <h3 class="mb-5">Welcome, {{ email }}</h3>
+                <button type="button" class="btn btn-primary zbutton"><a href="{% url 'create-report' %}">Create Report</a></button>
+                <button type="button" class="btn btn-info zbutton"><a href="{% url 'check-report' %}">Check Report</a></button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

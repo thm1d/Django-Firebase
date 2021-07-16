@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% load static %}
-    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <link href="{% static 'report/style.css' %}" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
@@ -22,13 +22,18 @@
     </style>
 </head>
 <body>
-    <div class="xbutton">
+    <div class="xbutton" style="z-index: 1000;">
         <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
             <i class='bx bx-log-out'></i> Log out
         </a>
     </div>
     <div class="wrapper fadeInDown">
         <div id="formContent">
+            <div class="ybutton">
+                <a href="{% url 'profile' %}" class="btn btn-info btn-sm">
+                    &#8592; Go Back
+                </a>
+            </div>
             <div class="content p-5">
                 <h3 class="mb-5 mt-2"> {{ name }}'s Report {{ time }}</h3>
                 <div class="text-left">

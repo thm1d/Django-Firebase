@@ -35,14 +35,14 @@
             <!-- Login Form -->
             <form action="/post-create/" method="POST">
                 {% csrf_token %}
-                <label for="work-assign" class="w-100 text-left font-weight-bold">Work Assign : </label>
+                <label for="work-assign" class="w-100 text-left font-weight-bold fadeIn second">Work Assign : </label>
                 <input type="text" id="work-assign" class="fadeIn second" name="work-assign" placeholder="Work Name" required>
-                <label for="progress" class="w-100 text-left font-weight-bold">Progress : </label>
-                <input id="progress" class="" type="text" name="progress" placeholder="e.g. 80%" required>
-                <label for="file-upload" class="w-100 text-left font-weight-bold">Document : </label>
-                <input id="file-upload" class="" type="file" name="file[]">
+                <label for="progress" class="w-100 text-left font-weight-bold fadeIn third">Progress : </label>
+                <input id="progress" class="fadeIn third" type="text" name="progress" placeholder="e.g. 80%" required>
+                <label for="file-upload" class="w-100 text-left font-weight-bold fadeIn fourth">Document : </label>
+                <input id="file-upload" class="fadeIn fourth" type="file" name="file[]">
                 <input type="hidden" name="url" id="url" value="">
-                <button type="button" onclick="uploadimage()">Upload</button>
+                <button type="button" class="fadeIn fourth" onclick="uploadimage()">Upload</button>
                 <input type="submit" class="fadeIn fourth mt-5" value="Submit">
             </form>
       
