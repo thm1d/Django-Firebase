@@ -23,7 +23,7 @@
 <body>
     
 
-    <div class="xbutton">
+    <div class="xbutton" style="z-index: 999;">
         <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
             <i class='bx bx-log-out'></i> Log out
         </a>
@@ -31,10 +31,12 @@
     
     <div class="wrapper fadeInDown">
         <div id="formContent">
-            <div class="content w-auto p-2">
+            <div class="content w-auto p-2" style="height: 50vh">
                 <h3 class="mb-5">Welcome, {{ email }}</h3>
-                <button type="button" class="btn btn-primary zbutton"><a href="{% url 'create-report' %}">Create Report</a></button>
-                <button type="button" class="btn btn-info zbutton"><a href="{% url 'check-report' %}">Check Report</a></button>
+                <div class="d-flex justify-content-center my-auto">
+                    <button type="button" class="btn btn-primary zbutton mr-2"><a href="{% url 'create-report' %}">Create Report</a></button>
+                    <button type="button" class="btn btn-info zbutton ml-2"><a href="{% url 'check-report' %}">Check Report</a></button>
+                </div>
             </div>
         </div>
     </div>

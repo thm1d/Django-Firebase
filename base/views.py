@@ -41,6 +41,7 @@ def postRegisterView(request):
 
     data = {
         'name': name,
+        'email': email,
         'status': '1'
     }
 

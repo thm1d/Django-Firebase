@@ -9,9 +9,13 @@
     <link href="{% static 'style.css' %}" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
     
     <title>Home</title>
 
@@ -23,13 +27,24 @@
     </style>
 </head>
 <body>
-    <div class="xbutton">
-        <a href="{% url 'register' %}" class="btn btn-info btn-lg mr-2">
-            <i class='bx bx-log-out'></i> Register
-        </a>
-        <a href="{% url 'auth' %}" class="btn btn-info btn-lg">
-            <i class='bx bx-log-out'></i> Log in
-        </a>
+    <div class="container">
+        <div class="home-container h-auto">
+            <div class="title-bar w-100">
+                <h1 class="text-white" style="font-family: 'Cairo', sans-serif;">Progress Tracker</h1>
+            </div>
+        </div>
+        <div class="xbutton">
+            <a href="{% url 'register' %}" class="btn btn-info btn-lg mr-2">
+                <i class='bx bx-log-in'></i> Register
+            </a>
+            <a href="{% url 'auth' %}" class="btn btn-info btn-lg">
+                <i class='bx bx-log-in'></i> Log in
+            </a>
+        </div>
+
+        <!-- <div class="monologue text-white justify-content-end h-auto" style="margin-top: 50vh;">
+            <p class="fs-1">Tracking progress is now a lot easier with our PROGRESS TRACKER.</p>
+        </div> -->
     </div>
     
 </body>

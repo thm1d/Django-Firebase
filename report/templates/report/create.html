@@ -50,12 +50,14 @@
     </div>
     
     <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    {% load static %}
+    <script type='text/javascript' src="{% static 'report/config.js' %}"></script>
     <script>
         var firebaseConfig = {
-            apiKey: "AIzaSyDyR0VY3oPezm2v5_5tDK1Sdwkirmac6CI",
-            authDomain: "djangofirebase-c9c2d.firebaseapp.com",
-            databaseURL: "https://djangofirebase-c9c2d-default-rtdb.asia-southeast1.firebasedatabase.app/",
-            storageBucket: "djangofirebase-c9c2d.appspot.com"
+            apiKey: config.API_KEY,
+            authDomain: config.PROJECT_ID+".firebaseapp.com",
+            databaseURL: "https://"+config.PROJECT_ID+"-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            storageBucket: config.PROJECT_ID+".appspot.com"
         };
         firebase.initializeApp(firebaseConfig);
 
@@ -93,7 +95,6 @@
                     // Upload completed successfully, now we can get the download URL
                     var url = uploadTask.snapshot.downloadURL;
                     console.log('File available at', url);
-                    console.log("got url");
                     document.getElementById("url").value = url;
                     alert("file uploaded successfully");
                     // uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {

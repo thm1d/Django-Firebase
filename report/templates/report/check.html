@@ -43,7 +43,7 @@
                 {% else %} 
                 <div class="reports-list">
                     {% for time, date, work in comb_list %}
-                    <div class="report-list">
+                    <div class="report-list mt-2">
                         <p><b>Date :</b> {{ date }} &nbsp; <b>Work :</b> <a class="work-link" href="{% url 'post-report'  time %}"><u><i>{{ work }}</i></u></a></p>
                     </div>
                     {% endfor %}
